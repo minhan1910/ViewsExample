@@ -73,5 +73,13 @@ namespace ViewsExample.Controllers
 
             return View(personAndProductWrapperModel);
         }
+
+        [Route("home/all-products")]
+        public IActionResult All()
+        {
+            return View();
+            // Views/Home/All.cshtml - first location
+            // Views/Shared/All.cshtml - second location
+        }
     }
 }

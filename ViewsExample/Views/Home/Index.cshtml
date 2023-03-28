@@ -1,0 +1,107 @@
+﻿@using ViewsExample.Models
+
+@{
+    //string? appTitle = "Asp.net Core Demo App";
+
+    Person person = new() { Name = "An", DateOfBirth = Convert.ToDateTime("2002-01-01"), PersonGender = Gender.Other };
+
+    List<Person>? persons = (List<Person>)@ViewData["persons"];
+}
+
+<!-- như static có thể dùng khắp web pages like
+    
+    Functions.GetAge(...)
+-->
+@{
+    // method
+    double? GetAge(DateTime? dateOfBirth)
+    {
+        if (dateOfBirth is null)
+        {
+            return null;
+        }
+
+        double totalDays = (DateTime.Now - dateOfBirth.Value).TotalDays,
+               age = totalDays / 365.25;
+
+        return Math.Round(age);
+    }
+
+    //int x = 10;
+
+    //string Name { get; set; } = "Hello Name";
+
+    string alertMessage = $"<script>alert('{persons.Count} people found')</script>";
+}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>@ViewData["pageTitle"]</title>
+        <meta charset="utf-8" />
+        <link href="~/StyleSheet.css" rel="stylesheet"/>
+    </head>
+    <body>
+        <div class="page-content">
+            <h1>Welcome</h1>
+            <h2>Hello @person.Name</h2>
+            @if (person.DateOfBirth.HasValue)
+            {
+                <h3>@GetAge(person.DateOfBirth) years old</h3>
+            }
+            else
+            {
+                <h3>Date of birth is unknown</h3>
+            }
+
+            @switch (person.PersonGender)
+            {
+                case Gender.Male:
+                    <p>November 19 is International Men's Day'</p>
+                    break;
+
+                case Gender.Female:
+                    <p>March 8 is International Women's Day</p>
+                    break;
+
+                case Gender.Other:
+                    <p>March 31 is International Transgender's Day</p>
+                    break;
+
+                default:
+                    <p>Please re-enter gender!</p>
+                    break;
+            }
+
+            <div>Foreach</div>
+            @foreach (var p in persons)
+            {
+                <div>
+                    <span>@p.Name </span>
+                    <span>@p.PersonGender </span>
+                    @if (p.DateOfBirth.HasValue)
+                    {
+                        <span>@p.DateOfBirth.Value.ToString("dd/MM/yyyy")</span>
+                    }
+                </div>
+            }
+
+            <div>For</div>
+            @for (int i = 0; i < persons.Count; ++i)
+            {
+                <text>Hello to </text>
+                <div>
+                    <span>@persons[i].Name </span>
+                    <span>@persons[i].PersonGender </span>
+                    @if (persons[i].DateOfBirth is not null)
+                    {
+                        <span>@persons[i].DateOfBirth!.Value.ToString("dd/MM/yyyy")</span>
+                    }
+                </div>
+            }
+        </div>
+</body>
+</html>
+
+
+

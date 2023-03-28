@@ -176,6 +176,11 @@
     text-align: center;
 }
 
+.error {
+    color: red;
+    font-weight: bold;
+}
+
 @media screen and (min-width: 1000px) {
     .navbar-brand {
         display: inline-block;
@@ -195,3 +200,5 @@
     .navbar > ul > li > a {
     }
 }
+
+

@@ -1,0 +1,38 @@
+﻿@model Person
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Person Details</title>
+        <meta charset="utf-8" />
+        <link href="~/StyleSheet.css" rel="stylesheet"/>
+    </head>
+    
+    <body>
+        <div class="page-content">
+            <h1>Person Details</h1>
+            @if (Model != null) {
+                <div class="box w-50 float-left">
+                    <h3>@Model.Name</h3>
+                    <br />
+                    <table class="table w-100">
+                        <tbody>
+                            <tr>
+                                <td>@nameof(Model.PersonGender)</td>
+                                <td>@Model.PersonGender</td>
+                             </tr>
+                            <tr>
+                                <td>Date of Birth</td>
+                                <td>@Model.DateOfBirth?.ToString("dd/MM/yyyy")</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            } else {
+                <span class="error">@ViewData["error"]</span>
+            }
+
+            <a href="/home">Back Home</a>
+        </div>
+    </body>
+</html>
